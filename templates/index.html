@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>MalariaScope AI</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:linear-gradient(135deg,#667eea,#764ba2);
+color:white;
+text-align:center;
+padding-top:40px;
+}
+
+.container{
+background:white;
+color:black;
+width:500px;
+margin:auto;
+padding:30px;
+border-radius:15px;
+box-shadow:0px 0px 25px rgba(0,0,0,0.2);
+}
+
+h1{
+margin-bottom:5px;
+}
+
+.upload-box{
+border:2px dashed #aaa;
+padding:40px;
+margin-top:20px;
+border-radius:10px;
+cursor:pointer;
+}
+
+.upload-box:hover{
+background:#f3f3f3;
+}
+
+button{
+margin-top:20px;
+padding:12px 25px;
+background:#667eea;
+color:white;
+border:none;
+border-radius:6px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#5563c1;
+}
+
+.result{
+margin-top:25px;
+padding:20px;
+border-radius:10px;
+font-size:18px;
+}
+
+.parasitized{
+background:#ffdddd;
+color:#b30000;
+}
+
+.uninfected{
+background:#ddffdd;
+color:#006600;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🦠 MalariaScope AI</h1>
+<p>Deep Learning Malaria Detection</p>
+
+<div class="container">
+
+<form action="/predict" method="post" enctype="multipart/form-data">
+
+<div class="upload-box">
+<input type="file" name="file" required>
+</div>
+
+<button type="submit">Analyze Image</button>
+
+</form>
+
+{% if prediction %}
+
+<div class="result {% if prediction == 'PARASITIZED' %}parasitized{% else %}uninfected{% endif %}">
+
+<h2>{{ prediction }}</h2>
+
+<p>Confidence: {{ confidence }}%</p>
+
+{% if prediction == "PARASITIZED" %}
+<p>⚠ Malaria parasites detected</p>
+{% else %}
+<p>✔ No malaria parasites detected</p>
+{% endif %}
+
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>
