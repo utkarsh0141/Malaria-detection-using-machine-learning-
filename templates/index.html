@@ -474,7 +474,7 @@
             </form>
 
             {% if prediction %}
-            <div class="result-container {% if prediction == 'PARASITIZED' %}parasitized-result{% else %}uninfected-result{% endif %}">
+            <div id="result" class="result-container {% if prediction == 'PARASITIZED' %}parasitized-result{% else %}uninfected-result{% endif %}">
                 <h3 class="result-title">Analysis Result</h3>
                 
                 <div class="prediction-value">
@@ -538,6 +538,15 @@
             dropZone.style.borderColor = 'var(--neon-purple)';
             dropZone.style.background = 'rgba(139, 92, 246, 0.05)';
         });
+
+        {% if prediction %}
+        // Scroll to the result section smoothly
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        });
+        {% endif %}
     </script>
 </body>
 </html>
